@@ -4,7 +4,7 @@ import upload_area from '../../assets/upload_area.svg'
 
 const AddProduct = () => {
 
-  // 🔥 multiple images
+  //  multiple images
   const [images, setImages] = useState([])
 
   const [productDetails, setProductDetails] = useState({
@@ -16,7 +16,7 @@ const AddProduct = () => {
     old_price: ""
   })
 
-  // 🔥 multiple files handler
+  //  multiple files handler
   const imageHandler = (e) => {
     setImages([...e.target.files]);
   }
@@ -25,7 +25,7 @@ const AddProduct = () => {
     setProductDetails({ ...productDetails, [e.target.name]: e.target.value })
   }
 
-  // 🔥 MAIN FUNCTION (UPDATED)
+  //  MAIN FUNCTION (UPDATED)
   const Add_Product = async () => {
 
     if (images.length === 0) {
@@ -38,7 +38,7 @@ const AddProduct = () => {
       let formData = new FormData();
       formData.append('product', images[i]);
 
-      // 🟢 Upload image
+      //  Upload image
       let responseData = await fetch(`${import.meta.env.VITE_API_URL}/upload`, {
         method: 'POST',
         body: formData,
@@ -52,7 +52,7 @@ const AddProduct = () => {
           public_id: responseData.public_id,
         };
 
-        // 🟢 Add product
+        //  Add product
         await fetch(`${import.meta.env.VITE_API_URL}/addproduct`, {
           method: 'POST',
           headers: {
@@ -63,7 +63,7 @@ const AddProduct = () => {
       }
     }
 
-    alert("All Products Added 🔥");
+    alert("All Products Added ");
   }
 
   return (
@@ -100,7 +100,7 @@ const AddProduct = () => {
           <img src={images.length > 0 ? URL.createObjectURL(images[0]) : upload_area} className="addproduct-thumnail-img" alt="" />
         </label>
 
-        {/* 🔥 MULTIPLE FILE INPUT */}
+        {/*  MULTIPLE FILE INPUT */}
         <input onChange={imageHandler} type="file" name='image' id='file-input' multiple hidden />
       </div>
 
